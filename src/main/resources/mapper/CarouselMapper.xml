@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abashop.mapper.CarouselMapper">
+    <resultMap id="BaseResultMap" type="com.abashop.pojo.Carousel">
+        <constructor>
+            <idArg column="img_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="img_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="des" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="upload_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="category_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    img_id, shop_id, img_url, des, upload_time, category_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from carousel
+        where img_id = #{imgId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from carousel
+    where img_id = #{imgId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.abashop.pojo.Carousel">
+    insert into carousel (img_id, shop_id, img_url, 
+      des, upload_time, category_id
+      )
+    values (#{imgId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{des,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{categoryId,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.abashop.pojo.Carousel">
+        insert into carousel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imgId != null">
+                img_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="des != null">
+                des,
+            </if>
+            <if test="uploadTime != null">
+                upload_time,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="imgId != null">
+                #{imgId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="des != null">
+                #{des,jdbcType=VARCHAR},
+            </if>
+            <if test="uploadTime != null">
+                #{uploadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.Carousel">
+        update carousel
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="imgUrl != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="des != null">
+                des = #{des,jdbcType=VARCHAR},
+            </if>
+            <if test="uploadTime != null">
+                upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where img_id = #{imgId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.Carousel">
+    update carousel
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      category_id = #{categoryId,jdbcType=INTEGER}
+    where img_id = #{imgId,jdbcType=BIGINT}
+  </update>
+</mapper>

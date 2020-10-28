@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abashop.mapper.deliveryMapper">
+    <resultMap id="BaseResultMap" type="com.abashop.pojo.delivery">
+        <constructor>
+            <idArg column="dvy_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="dvy_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="company_home_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="rec_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="modify_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="query_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    dvy_id, dvy_name, company_home_url, rec_time, modify_time, query_url
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from delivery
+        where dvy_id = #{dvyId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from delivery
+    where dvy_id = #{dvyId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.abashop.pojo.delivery">
+    insert into delivery (dvy_id, dvy_name, company_home_url, 
+      rec_time, modify_time, query_url
+      )
+    values (#{dvyId,jdbcType=BIGINT}, #{dvyName,jdbcType=VARCHAR}, #{companyHomeUrl,jdbcType=VARCHAR}, 
+      #{recTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{queryUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.abashop.pojo.delivery">
+        insert into delivery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dvyId != null">
+                dvy_id,
+            </if>
+            <if test="dvyName != null">
+                dvy_name,
+            </if>
+            <if test="companyHomeUrl != null">
+                company_home_url,
+            </if>
+            <if test="recTime != null">
+                rec_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="queryUrl != null">
+                query_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dvyId != null">
+                #{dvyId,jdbcType=BIGINT},
+            </if>
+            <if test="dvyName != null">
+                #{dvyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyHomeUrl != null">
+                #{companyHomeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="recTime != null">
+                #{recTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryUrl != null">
+                #{queryUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.delivery">
+        update delivery
+        <set>
+            <if test="dvyName != null">
+                dvy_name = #{dvyName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyHomeUrl != null">
+                company_home_url = #{companyHomeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="recTime != null">
+                rec_time = #{recTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="queryUrl != null">
+                query_url = #{queryUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where dvy_id = #{dvyId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.delivery">
+    update delivery
+    set dvy_name = #{dvyName,jdbcType=VARCHAR},
+      company_home_url = #{companyHomeUrl,jdbcType=VARCHAR},
+      rec_time = #{recTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      query_url = #{queryUrl,jdbcType=VARCHAR}
+    where dvy_id = #{dvyId,jdbcType=BIGINT}
+  </update>
+</mapper>

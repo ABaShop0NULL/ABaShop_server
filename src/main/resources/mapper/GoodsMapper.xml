@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abashop.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.abashop.pojo.Goods">
+        <constructor>
+            <idArg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="ori_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="brief" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="goods_pic" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="goods_imgs" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="goods_status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="category_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="sold_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="total_stocks" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="putaway_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.abashop.pojo.Goods">
+        <constructor>
+            <idArg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="ori_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="brief" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="goods_pic" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="goods_imgs" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="goods_status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="category_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="sold_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="total_stocks" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="putaway_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    goods_id, goods_name, shop_id, ori_price, price, brief, goods_pic, goods_imgs, goods_status, 
+    category_id, sold_num, total_stocks, create_time, update_time, putaway_time
+  </sql>
+    <sql id="Blob_Column_List">
+    content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from goods
+        where goods_id = #{goodsId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.abashop.pojo.Goods">
+    insert into goods (goods_id, goods_name, shop_id, 
+      ori_price, price, brief, 
+      goods_pic, goods_imgs, goods_status, 
+      category_id, sold_num, total_stocks, 
+      create_time, update_time, putaway_time, 
+      content)
+    values (#{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, 
+      #{oriPrice,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{brief,jdbcType=VARCHAR}, 
+      #{goodsPic,jdbcType=VARCHAR}, #{goodsImgs,jdbcType=VARCHAR}, #{goodsStatus,jdbcType=INTEGER}, 
+      #{categoryId,jdbcType=BIGINT}, #{soldNum,jdbcType=INTEGER}, #{totalStocks,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{putawayTime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.abashop.pojo.Goods">
+        insert into goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="oriPrice != null">
+                ori_price,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="brief != null">
+                brief,
+            </if>
+            <if test="goodsPic != null">
+                goods_pic,
+            </if>
+            <if test="goodsImgs != null">
+                goods_imgs,
+            </if>
+            <if test="goodsStatus != null">
+                goods_status,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="soldNum != null">
+                sold_num,
+            </if>
+            <if test="totalStocks != null">
+                total_stocks,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="putawayTime != null">
+                putaway_time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="oriPrice != null">
+                #{oriPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="brief != null">
+                #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPic != null">
+                #{goodsPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsImgs != null">
+                #{goodsImgs,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsStatus != null">
+                #{goodsStatus,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="soldNum != null">
+                #{soldNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalStocks != null">
+                #{totalStocks,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="putawayTime != null">
+                #{putawayTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.Goods">
+        update goods
+        <set>
+            <if test="goodsName != null">
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="oriPrice != null">
+                ori_price = #{oriPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="brief != null">
+                brief = #{brief,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPic != null">
+                goods_pic = #{goodsPic,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsImgs != null">
+                goods_imgs = #{goodsImgs,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsStatus != null">
+                goods_status = #{goodsStatus,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="soldNum != null">
+                sold_num = #{soldNum,jdbcType=INTEGER},
+            </if>
+            <if test="totalStocks != null">
+                total_stocks = #{totalStocks,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="putawayTime != null">
+                putaway_time = #{putawayTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where goods_id = #{goodsId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abashop.pojo.Goods">
+    update goods
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      ori_price = #{oriPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      brief = #{brief,jdbcType=VARCHAR},
+      goods_pic = #{goodsPic,jdbcType=VARCHAR},
+      goods_imgs = #{goodsImgs,jdbcType=VARCHAR},
+      goods_status = #{goodsStatus,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sold_num = #{soldNum,jdbcType=INTEGER},
+      total_stocks = #{totalStocks,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      putaway_time = #{putawayTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.Goods">
+    update goods
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      ori_price = #{oriPrice,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      brief = #{brief,jdbcType=VARCHAR},
+      goods_pic = #{goodsPic,jdbcType=VARCHAR},
+      goods_imgs = #{goodsImgs,jdbcType=VARCHAR},
+      goods_status = #{goodsStatus,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sold_num = #{soldNum,jdbcType=INTEGER},
+      total_stocks = #{totalStocks,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      putaway_time = #{putawayTime,jdbcType=TIMESTAMP}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+</mapper>

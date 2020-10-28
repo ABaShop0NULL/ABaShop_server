@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abashop.mapper.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.abashop.pojo.Category">
+        <constructor>
+            <idArg column="category_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="parent_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="category_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="icon" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="pic" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="seq" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="rec_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="grade" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    category_id, shop_id, parent_id, category_name, icon, pic, seq, status, rec_time, 
+    grade, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category
+        where category_id = #{categoryId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from category
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.abashop.pojo.Category">
+    insert into category (category_id, shop_id, parent_id, 
+      category_name, icon, pic, 
+      seq, status, rec_time, 
+      grade, update_time)
+    values (#{categoryId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, 
+      #{categoryName,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{recTime,jdbcType=TIMESTAMP}, 
+      #{grade,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.abashop.pojo.Category">
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="categoryName != null">
+                category_name,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="seq != null">
+                seq,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="recTime != null">
+                rec_time,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryName != null">
+                #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="seq != null">
+                #{seq,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="recTime != null">
+                #{recTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.Category">
+        update category
+        <set>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="categoryName != null">
+                category_name = #{categoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="pic != null">
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="seq != null">
+                seq = #{seq,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="recTime != null">
+                rec_time = #{recTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where category_id = #{categoryId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.Category">
+    update category
+    set shop_id = #{shopId,jdbcType=BIGINT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      rec_time = #{recTime,jdbcType=TIMESTAMP},
+      grade = #{grade,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where category_id = #{categoryId,jdbcType=BIGINT}
+  </update>
+</mapper>
