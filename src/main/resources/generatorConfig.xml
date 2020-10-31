@@ -84,16 +84,16 @@
         </javaClientGenerator>
 
         <!-- 数据表进行生成操作 tableName:表名; domainObjectName:对应的DO -->
-        <table tableName="test"
+        <!--<table tableName="test"
                domainObjectName="Test"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
-        </table>
+        </table>-->
         <!--测试成功-->
-        <table tableName="userinfo"
+        <table tableName="user"
                domainObjectName="User"
                enableCountByExample="false"
                enableUpdateByExample="false"
@@ -101,7 +101,7 @@
                enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="area"
+        <!--<table tableName="area"
                domainObjectName="Area"
                enableCountByExample="false"
                enableUpdateByExample="false"
@@ -132,15 +132,16 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
-        </table>
+        </table> -->
         <table tableName="delivery"
-               domainObjectName="delivery"
+               domainObjectName="Delivery"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+        <!--
         <table tableName="goods"
                domainObjectName="Goods"
                enableCountByExample="false"
@@ -172,6 +173,6 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
-        </table>
+        </table>-->
     </context>
 </generatorConfiguration>

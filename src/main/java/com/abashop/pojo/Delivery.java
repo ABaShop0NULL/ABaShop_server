@@ -2,7 +2,7 @@ package com.abashop.pojo;
 
 import java.util.Date;
 
-public class delivery {
+public class Delivery {
     private Long dvyId;
 
     private String dvyName;
@@ -15,7 +15,7 @@ public class delivery {
 
     private String queryUrl;
 
-    public delivery(Long dvyId, String dvyName, String companyHomeUrl, Date recTime, Date modifyTime, String queryUrl) {
+    public Delivery(Long dvyId, String dvyName, String companyHomeUrl, Date recTime, Date modifyTime, String queryUrl) {
         this.dvyId = dvyId;
         this.dvyName = dvyName;
         this.companyHomeUrl = companyHomeUrl;
@@ -24,7 +24,7 @@ public class delivery {
         this.queryUrl = queryUrl;
     }
 
-    public delivery() {
+    public Delivery() {
         super();
     }
 

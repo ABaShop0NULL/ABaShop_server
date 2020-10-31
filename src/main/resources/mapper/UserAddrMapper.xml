@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abashop.mapper.UserAddrMapper">
-    <resultMap id="BaseResultMap" type="com.abashop.pojo.UserAddr">
+    <resultMap id="AddrResultMap" type="UserAddr">
         <constructor>
             <idArg column="add_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -20,13 +20,13 @@
             <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </constructor>
     </resultMap>
-    <sql id="Base_Column_List">
+    <sql id="Addr_Column_List">
     add_id, user_id, receiver, province, province_id, city, city_id, area, area_id, post_code, 
     addr, mobile, common_addr, create_time, update_time
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="AddrResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Addr_Column_List"/>
         from user_addr
         where add_id = #{addId,jdbcType=BIGINT}
     </select>
@@ -34,7 +34,7 @@
     delete from user_addr
     where add_id = #{addId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.abashop.pojo.UserAddr">
+    <insert id="insert" parameterType="UserAddr">
     insert into user_addr (add_id, user_id, receiver, 
       province, province_id, city, 
       city_id, area, area_id, 
@@ -48,7 +48,7 @@
       #{commonAddr,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.abashop.pojo.UserAddr">
+    <insert id="insertSelective" parameterType="UserAddr">
         insert into user_addr
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="addId != null">
@@ -145,7 +145,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.UserAddr">
+    <update id="updateByPrimaryKeySelective" parameterType="UserAddr">
         update user_addr
         <set>
             <if test="userId != null">
@@ -193,7 +193,7 @@
         </set>
         where add_id = #{addId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.UserAddr">
+    <update id="updateByPrimaryKey" parameterType="UserAddr">
     update user_addr
     set user_id = #{userId,jdbcType=VARCHAR},
       receiver = #{receiver,jdbcType=VARCHAR},

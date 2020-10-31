@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abashop.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.abashop.pojo.Order">
+    <resultMap id="OrderResultMap" type="Order">
         <constructor>
             <idArg column="order_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
@@ -33,15 +33,15 @@
             <arg column="close_type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
         </constructor>
     </resultMap>
-    <sql id="Base_Column_List">
+    <sql id="Order_Column_List">
     order_id, shop_id, prod_name, user_id, order_number, total, actual_total, pay_type, 
     remarks, status, dvy_type, dvy_id, dvy_flow_id, freight_amount, addr_order_id, product_nums, 
     create_time, update_time, pay_time, dvy_time, finally_time, cancel_time, is_payed, 
     delete_status, refund_sts, reduce_amount, order_type, close_type
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="OrderResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Order_Column_List"/>
         from order
         where order_id = #{orderId,jdbcType=BIGINT}
     </select>
@@ -49,7 +49,7 @@
     delete from order
     where order_id = #{orderId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.abashop.pojo.Order">
+    <insert id="insert" parameterType="Order">
     insert into order (order_id, shop_id, prod_name, 
       user_id, order_number, total, 
       actual_total, pay_type, remarks, 
@@ -71,7 +71,7 @@
       #{refundSts,jdbcType=INTEGER}, #{reduceAmount,jdbcType=DECIMAL}, #{orderType,jdbcType=TINYINT}, 
       #{closeType,jdbcType=TINYINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.abashop.pojo.Order">
+    <insert id="insertSelective" parameterType="Order">
         insert into order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="orderId != null">
@@ -246,7 +246,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.Order">
+    <update id="updateByPrimaryKeySelective" parameterType="Order">
         update order
         <set>
             <if test="shopId != null">
@@ -333,7 +333,7 @@
         </set>
         where order_id = #{orderId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.Order">
+    <update id="updateByPrimaryKey" parameterType="Order">
     update order
     set shop_id = #{shopId,jdbcType=BIGINT},
       prod_name = #{prodName,jdbcType=VARCHAR},

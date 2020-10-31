@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abashop.mapper.GoodsMapper">
-    <resultMap id="BaseResultMap" type="com.abashop.pojo.Goods">
+    <resultMap id="GoodsResultMap" type="Goods">
         <constructor>
             <idArg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -20,7 +20,7 @@
             <arg column="putaway_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </constructor>
     </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.abashop.pojo.Goods">
+    <resultMap id="ResultMapWithBLOBs" type="Goods">
         <constructor>
             <idArg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -40,7 +40,7 @@
             <arg column="content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
         </constructor>
     </resultMap>
-    <sql id="Base_Column_List">
+    <sql id="Goods_Column_List">
     goods_id, goods_name, shop_id, ori_price, price, brief, goods_pic, goods_imgs, goods_status, 
     category_id, sold_num, total_stocks, create_time, update_time, putaway_time
   </sql>
@@ -49,7 +49,7 @@
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Goods_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from goods
@@ -59,7 +59,7 @@
     delete from goods
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.abashop.pojo.Goods">
+    <insert id="insert" parameterType="Goods">
     insert into goods (goods_id, goods_name, shop_id, 
       ori_price, price, brief, 
       goods_pic, goods_imgs, goods_status, 
@@ -73,7 +73,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{putawayTime,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.abashop.pojo.Goods">
+    <insert id="insertSelective" parameterType="Goods">
         insert into goods
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="goodsId != null">
@@ -176,7 +176,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.Goods">
+    <update id="updateByPrimaryKeySelective" parameterType="Goods">
         update goods
         <set>
             <if test="goodsName != null">
@@ -227,7 +227,7 @@
         </set>
         where goods_id = #{goodsId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.abashop.pojo.Goods">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="Goods">
     update goods
     set goods_name = #{goodsName,jdbcType=VARCHAR},
       shop_id = #{shopId,jdbcType=BIGINT},
@@ -246,7 +246,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.Goods">
+    <update id="updateByPrimaryKey" parameterType="Goods">
     update goods
     set goods_name = #{goodsName,jdbcType=VARCHAR},
       shop_id = #{shopId,jdbcType=BIGINT},

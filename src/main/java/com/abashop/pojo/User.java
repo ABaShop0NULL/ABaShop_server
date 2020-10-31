@@ -1,19 +1,25 @@
 package com.abashop.pojo;
 
-public class User {
-    private String userId;
+import com.sun.istack.internal.NotNull;
+import org.springframework.lang.NonNull;
 
+public class User {
+    @NotNull
+    private Long userId;
+
+    @NotNull
     private String userName;
 
     private String sex;
 
+    @NotNull
     private String userPassword;
 
-    private Integer phone;
+    private String phone;
 
     private String userImgId;
 
-    public User(String userId, String userName, String sex, String userPassword, Integer phone, String userImgId) {
+    public User(Long userId, String userName, String sex, String userPassword, String phone, String userImgId) {
         this.userId = userId;
         this.userName = userName;
         this.sex = sex;
@@ -22,16 +28,24 @@ public class User {
         this.userImgId = userImgId;
     }
 
+    //自定义构造函数，不能完全暴露用户信息
+    public User(String userName, String sex, String phone, String userImgId) {
+        this.userName = userName;
+        this.sex = sex;
+        this.phone = phone;
+        this.userImgId = userImgId;
+    }
+
     public User() {
         super();
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -58,12 +72,12 @@ public class User {
         this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getUserImgId() {
