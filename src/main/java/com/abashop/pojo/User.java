@@ -1,37 +1,29 @@
 package com.abashop.pojo;
 
-import com.sun.istack.internal.NotNull;
-import org.springframework.lang.NonNull;
-
 public class User {
-    @NotNull
     private Long userId;
 
-    @NotNull
     private String userName;
 
     private String sex;
 
-    @NotNull
     private String userPassword;
 
     private String phone;
 
     private String userImgId;
 
+    public User(String userName, String sex, String phone) {
+        this.userName = userName;
+        this.sex = sex;
+        this.phone = phone;
+    }
+
     public User(Long userId, String userName, String sex, String userPassword, String phone, String userImgId) {
         this.userId = userId;
         this.userName = userName;
         this.sex = sex;
         this.userPassword = userPassword;
-        this.phone = phone;
-        this.userImgId = userImgId;
-    }
-
-    //自定义构造函数，不能完全暴露用户信息
-    public User(String userName, String sex, String phone, String userImgId) {
-        this.userName = userName;
-        this.sex = sex;
         this.phone = phone;
         this.userImgId = userImgId;
     }
