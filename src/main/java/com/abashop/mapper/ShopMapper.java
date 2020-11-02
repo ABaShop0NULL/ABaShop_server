@@ -14,4 +14,10 @@ public interface ShopMapper {
     int updateByPrimaryKeySelective(Shop record);
 
     int updateByPrimaryKey(Shop record);
+
+    Shop selectByUser(String userName);
+
+    int insertSelectiveSelf(Shop record);
+
+    int updateByUserSelective(Shop record);
 }

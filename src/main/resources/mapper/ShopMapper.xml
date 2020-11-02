@@ -15,6 +15,11 @@
     <sql id="Shop_Column_List">
     shop_id, shop_name, shop_logo, shop_status, create_time, user_id, user_name
   </sql>
+    <select id="selectByUser">
+        select shop_name
+        from shop
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ShopResultMap">
         select
         <include refid="Shop_Column_List"/>
@@ -33,6 +38,12 @@
       #{shopStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR})
   </insert>
+    <insert id="insertSelectiveSelf" parameterType="Shop">
+        insert into shop (shop_name, shop_logo, create_time, user_name)
+        values (#{shopName,jdbcType=VARCHAR}, #{shopLogo,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},#{userName,jdbcType=VARCHAR});
+    </insert>
+
     <insert id="insertSelective" parameterType="Shop">
         insert into shop
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -105,6 +116,21 @@
             </if>
         </set>
         where shop_id = #{shopId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByUserSelective" parameterType="Shop">
+        update shop
+        <set>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopLogo != null">
+                shop_logo = #{shopLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="shopStatus != null">
+                shop_status = #{shopStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where user_name = #{userName,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="Shop">
     update shop
