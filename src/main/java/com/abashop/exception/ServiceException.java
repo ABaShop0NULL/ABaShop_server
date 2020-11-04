@@ -1,6 +1,4 @@
-package com.abashop.Exception;
-
-import jdk.nashorn.internal.objects.annotations.Getter;
+package com.abashop.exception;
 
 /**
  * @ClassName ServiceException

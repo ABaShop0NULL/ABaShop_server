@@ -26,10 +26,14 @@ public class ShopController {
     @RequestMapping("/shop/details")
     public RespUtil shopDetails(HttpServletRequest servletRequest) {
 //        这里需要的用户信息可以从session中获取
-        String userName = String.valueOf(servletRequest.getSession().getAttribute("userName"));//这里有问题，测试看结构
+        /*
+         * TODO:这里有问题，测试看返回数据
+         *  */
+        String userName = String.valueOf(servletRequest.getSession().getAttribute("userName"));
         Shop result = shopService.shopDetails(userName);
         if (result != null) {
-            servletRequest.setAttribute("shop", result.getShopName());
+            servletRequest.setAttribute("shopId", result.getShopId());
+            servletRequest.setAttribute("shopName", result.getShopName());
             return new RespUtil("success", "匹配成功");
         }
         return new RespUtil("error", "匹配失误，信息有误");

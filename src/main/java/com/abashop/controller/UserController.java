@@ -1,10 +1,9 @@
 package com.abashop.controller;
 
-import com.abashop.Exception.ServiceException;
+import com.abashop.exception.ServiceException;
 import com.abashop.pojo.User;
 import com.abashop.service.UserService;
 import com.abashop.utils.RespUtil;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
