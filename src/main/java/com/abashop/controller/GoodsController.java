@@ -27,6 +27,7 @@ public class GoodsController {
     public RespUtil goodsShow(@RequestParam Long shopId, HttpServletRequest servletRequest) {
 //        TODO 需要测试查看返回数据
         shopId = (Long) servletRequest.getSession().getAttribute("shopId");
+//        TODO CategoryController有借鉴，要错就一起错了
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         List<Goods> goodsList = goodsService.goodsShow(shopId);
         for (Goods goods : goodsList) {

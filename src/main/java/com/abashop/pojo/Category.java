@@ -25,6 +25,16 @@ public class Category {
 
     private Date updateTime;
 
+    public Category(Long categoryId, Long parentId, String categoryName, String icon, String pic, Integer grade) {
+        this.categoryId = categoryId;
+//        this.shopId = shopId;
+        this.parentId = parentId;
+        this.categoryName = categoryName;
+        this.icon = icon;
+        this.pic = pic;
+        this.grade = grade;
+    }
+
     public Category(Long categoryId, Long shopId, Long parentId, String categoryName, String icon, String pic, Integer seq, Integer status, Date recTime, Integer grade, Date updateTime) {
         this.categoryId = categoryId;
         this.shopId = shopId;

@@ -20,4 +20,8 @@ public interface CategoryMapper {
     int updateByPrimaryKey(Category record);
 
     List<Category> selectByParentId(Long parentId);
+
+    List<Category> selectByShopId(Long shopId);
+
+    List<Category> selectAll();
 }

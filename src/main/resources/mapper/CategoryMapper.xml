@@ -20,6 +20,7 @@
     category_id, shop_id, parent_id, category_name, icon, pic, seq, status, rec_time, 
     grade, update_time
   </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="CategoryResultMap">
         select
         <include refid="Category_Column_List"/>
@@ -31,6 +32,19 @@
         <include refid="Category_Column_List"/>
         from category
         where parent_id = #{shopId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByShopId" parameterType="java.lang.Long" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_Column_List"/>
+        from category
+        where shop_id = #{shopId,jdbcType=BIGINT}
+        order by seq
+    </select>
+    <select id="selectAll">
+        select
+        category_id,parent_id,category_name,pic,grade
+        from category
+        group by category_name
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from category
