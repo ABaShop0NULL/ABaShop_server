@@ -1,7 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Order;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface OrderMapper {
     int deleteByPrimaryKey(Long orderId);
 

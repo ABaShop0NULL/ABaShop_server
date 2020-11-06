@@ -1,7 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Area;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AreaMapper {
     int deleteByPrimaryKey(Long areaId);
 

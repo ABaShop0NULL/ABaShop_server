@@ -1,7 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Basket;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface BasketMapper {
     int deleteByPrimaryKey(Long basketId);
 

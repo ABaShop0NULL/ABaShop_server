@@ -1,7 +1,11 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Category;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface CategoryMapper {
     int deleteByPrimaryKey(Long categoryId);
 
@@ -14,4 +18,6 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<Category> selectByParentId(Long parentId);
 }

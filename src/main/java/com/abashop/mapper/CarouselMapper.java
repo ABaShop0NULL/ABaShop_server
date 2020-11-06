@@ -1,7 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Carousel;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CarouselMapper {
     int deleteByPrimaryKey(Long imgId);
 

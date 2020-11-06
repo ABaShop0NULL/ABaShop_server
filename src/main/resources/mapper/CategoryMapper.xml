@@ -26,6 +26,12 @@
         from category
         where category_id = #{categoryId,jdbcType=BIGINT}
     </select>
+    <select id="selectByParentId" parameterType="java.lang.Long" resultMap="CategoryResultMap">
+        select
+        <include refid="Category_Column_List"/>
+        from category
+        where parent_id = #{shopId,jdbcType=BIGINT}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from category
     where category_id = #{categoryId,jdbcType=BIGINT}

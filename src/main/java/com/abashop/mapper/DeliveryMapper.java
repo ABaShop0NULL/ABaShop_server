@@ -1,7 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Delivery;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface DeliveryMapper {
     int deleteByPrimaryKey(Long dvyId);
 
