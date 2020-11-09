@@ -35,14 +35,14 @@ public class CategoryController {
     }
 
 
-    //    TODO 首页分类信息 所有的分类
+//    首页的分类
     @GetMapping("/sys/category")
     public RespUtil categoryAll() {
         List<Category> categoryList = service.listAll();
         return new RespUtil("success", "所有分类", categoryList.size(), listFormat(categoryList));
     }
 
-    //    获取信息
+    //    获取分级信息
     @GetMapping("/category/info")
     public RespUtil categoryInfo(@RequestParam(value = "parentId", defaultValue = "0") Long parentId) {
         List<Category> categoryList = service.listByParentId(parentId);
@@ -66,14 +66,27 @@ public class CategoryController {
         return new RespUtil("success", "商铺分类", tableCategory.size(), listFormat(tableCategory));
     }
 
-//    添加/更新分类
-   /* @RequestMapping(value = "/category/save",method = RequestMethod.POST)
-    public RespUtil categorySave(@RequestBody Category category, HttpServletRequest servletRequest){
+    //    添加/更新分类
+    @RequestMapping(value = "/category/save", method = RequestMethod.POST)
+    public RespUtil categorySave(@RequestBody Category category, HttpServletRequest servletRequest) {
         Long shopId = (Long) servletRequest.getSession().getAttribute("shopId");
         int result = 0;
         Date date = new Date();
-        if ()
-        return new RespUtil("","");
-    }*/
+        if (category.getCategoryId() == null) {
+            //添加
+            category.setRecTime(date);
+            category.setShopId(shopId);
+            category.setUpdateTime(date);
+            result = service.saveCategroy(category);
+        } else {
+            //更新
+            category.setUpdateTime(date);
+            result = service.updateCategroy(category);
+        }
+        if (result != 0) {
+            return new RespUtil("success", "成功");
+        }
+        return new RespUtil("error", "字段规则匹配出问题");
+    }
 
 }

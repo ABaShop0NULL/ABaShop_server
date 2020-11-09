@@ -31,13 +31,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void saveCategroy(Category category) {
+    public int saveCategroy(Category category) {
 
+        return categoryMapper.insertSelective(category);
     }
 
     @Override
-    public void updateCategroy(Category category) {
+    public int updateCategroy(Category category) {
 
+        return categoryMapper.updateByPrimaryKeySelective(category);
     }
 
     @Override

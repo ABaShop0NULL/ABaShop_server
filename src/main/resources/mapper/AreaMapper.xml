@@ -18,6 +18,18 @@
         from area
         where area_id = #{areaId,jdbcType=BIGINT}
     </select>
+    <select id="selectProvinces" resultMap="AreaResultMap">
+        select
+        <include refid="Area_Column_List"/>
+        from area
+        where level = 1
+    </select>
+    <select id="selectCity" resultMap="AreaResultMap">
+        select
+        <include refid="Area_Column_List"/>
+        from area
+        where parent_id = #{parentId,jdbcType=BIGINT}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from area
     where area_id = #{areaId,jdbcType=BIGINT}

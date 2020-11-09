@@ -32,14 +32,14 @@ public interface CategoryService {
 	 *
 	 * @return
 	 */
-	void saveCategroy(Category category);
+	int saveCategroy(Category category);
 
 	/**
 	 * 修改分类、品牌、参数
 	 *
 	 * @return
 	 */
-	void updateCategroy(Category category);
+	int updateCategroy(Category category);
 	/**
 	 * 删除分类、品牌、参数 以及分类对应的图片
 	 * @param qiniu TODO：图片处理
