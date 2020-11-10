@@ -1,9 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.UserAddr;
-import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
+import java.util.List;
+
 public interface UserAddrMapper {
     int deleteByPrimaryKey(Long addId);
 
@@ -16,4 +16,6 @@ public interface UserAddrMapper {
     int updateByPrimaryKeySelective(UserAddr record);
 
     int updateByPrimaryKey(UserAddr record);
+
+    List<UserAddr> selectByUser(Long userId);
 }

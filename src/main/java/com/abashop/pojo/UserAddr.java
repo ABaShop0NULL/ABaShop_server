@@ -5,7 +5,7 @@ import java.util.Date;
 public class UserAddr {
     private Long addId;
 
-    private String userId;
+    private Long userId;
 
     private String receiver;
 
@@ -33,7 +33,7 @@ public class UserAddr {
 
     private Date updateTime;
 
-    public UserAddr(Long addId, String userId, String receiver, String province, Long provinceId, String city, Long cityId, String area, Long areaId, String postCode, String addr, String mobile, String commonAddr, Date createTime, Date updateTime) {
+    public UserAddr(Long addId, Long userId, String receiver, String province, Long provinceId, String city, Long cityId, String area, Long areaId, String postCode, String addr, String mobile, String commonAddr, Date createTime, Date updateTime) {
         this.addId = addId;
         this.userId = userId;
         this.receiver = receiver;
@@ -63,12 +63,12 @@ public class UserAddr {
         this.addId = addId;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getReceiver() {

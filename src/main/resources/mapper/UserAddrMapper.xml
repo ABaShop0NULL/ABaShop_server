@@ -1,10 +1,226 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abashop.mapper.UserAddrMapper">
+    <resultMap id="UserAddrResultMap" type="UserAddr">
+        <constructor>
+            <idArg column="add_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="receiver" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="province_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="city" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="city_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="area" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="area_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="post_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="addr" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="mobile" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="common_addr" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    add_id, user_id, receiver, province, province_id, city, city_id, area, area_id, post_code, 
+    addr, mobile, common_addr, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="UserAddrResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_addr
+        where add_id = #{addId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByUser" parameterType="java.lang.Long" resultMap="UserAddrResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_addr
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_addr
+    where add_id = #{addId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="UserAddr">
+    insert into user_addr (add_id, user_id, receiver, 
+      province, province_id, city, 
+      city_id, area, area_id, 
+      post_code, addr, mobile, 
+      common_addr, create_time, update_time
+      )
+    values (#{addId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{receiver,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{provinceId,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=BIGINT}, #{area,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, 
+      #{postCode,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{commonAddr,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="UserAddr">
+        insert into user_addr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="addId != null">
+                add_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="receiver != null">
+                receiver,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="postCode != null">
+                post_code,
+            </if>
+            <if test="addr != null">
+                addr,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="commonAddr != null">
+                common_addr,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="addId != null">
+                #{addId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="receiver != null">
+                #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=BIGINT},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=BIGINT},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=BIGINT},
+            </if>
+            <if test="postCode != null">
+                #{postCode,jdbcType=VARCHAR},
+            </if>
+            <if test="addr != null">
+                #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="commonAddr != null">
+                #{commonAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="UserAddr">
+        update user_addr
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="receiver != null">
+                receiver = #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=BIGINT},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=BIGINT},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=BIGINT},
+            </if>
+            <if test="postCode != null">
+                post_code = #{postCode,jdbcType=VARCHAR},
+            </if>
+            <if test="addr != null">
+                addr = #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="commonAddr != null">
+                common_addr = #{commonAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where add_id = #{addId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="UserAddr">
+    update user_addr
+    set user_id = #{userId,jdbcType=BIGINT},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      city = #{city,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      area = #{area,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      common_addr = #{commonAddr,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where add_id = #{addId,jdbcType=BIGINT}
+  </update>
     <resultMap id="AddrResultMap" type="UserAddr">
         <constructor>
             <idArg column="add_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="user_id" javaType="java.lang.Long" jdbcType="VARCHAR"/>
             <arg column="receiver" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="province_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
@@ -29,6 +245,12 @@
         <include refid="Addr_Column_List"/>
         from user_addr
         where add_id = #{addId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="AddrResultMap">
+        select
+        <include refid="Addr_Column_List"/>
+        from user_addr
+        where user_id = #{userId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_addr
