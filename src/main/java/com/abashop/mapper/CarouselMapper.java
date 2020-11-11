@@ -3,6 +3,8 @@ package com.abashop.mapper;
 import com.abashop.pojo.Carousel;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface CarouselMapper {
     int deleteByPrimaryKey(Long imgId);
@@ -16,4 +18,6 @@ public interface CarouselMapper {
     int updateByPrimaryKeySelective(Carousel record);
 
     int updateByPrimaryKey(Carousel record);
+
+    List<Carousel> selectAll();
 }
