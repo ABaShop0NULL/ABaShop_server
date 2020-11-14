@@ -11,11 +11,31 @@ public class Basket {
 
     private Integer num;
 
-    private String userId;
+    private Long userId;
 
     private Date basketDate;
 
-    public Basket(Long basketId, Long shopId, Long goodsId, Integer num, String userId, Date basketDate) {
+    private Shop shop;
+    private Goods goods;
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public Goods getGoods() {
+        return goods;
+    }
+
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+    }
+
+
+    public Basket(Long basketId, Long shopId, Long goodsId, Integer num, Long userId, Date basketDate) {
         this.basketId = basketId;
         this.shopId = shopId;
         this.goodsId = goodsId;
@@ -60,12 +80,12 @@ public class Basket {
         this.num = num;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Date getBasketDate() {

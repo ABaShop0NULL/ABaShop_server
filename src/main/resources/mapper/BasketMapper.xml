@@ -7,13 +7,30 @@
             <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="goods_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
             <arg column="basket_date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </constructor>
     </resultMap>
     <sql id="Basket_Column_List">
     basket_id, shop_id, goods_id, num, user_id, basket_date
   </sql>
+    <!--TODO 多表查询写的有问题 取数据出问题的话，重点看这里 -->
+    <resultMap id="Cart" type="Basket" extends="BasketResultMap">
+        <association property="goods" javaType="Goods">
+            <result column="price" property="price"/>
+            <result column="goods_name" property="goodsName"/>
+            <result column="goods_pic" property="goodsPic"/>
+        </association>
+        <association property="shop" javaType="Shop">
+            <result column="shop_name" property="shopName"/>
+        </association>
+    </resultMap>
+    <select id="selectCartByUser" parameterType="java.lang.Long" resultMap="Basket">
+        select b.basket_id, s.shop_name, g.goods_name, b.num, b.basket_date, g.price, g.goods_pic
+        from basket b,left join shop s on b.shop_id = s.shop_id
+        left goods g on b.goods_id = g.goods_id
+        where u.user_id = #{userId,jdbcType=BIGINT}
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BasketResultMap">
         select
         <include refid="Basket_Column_List"/>
