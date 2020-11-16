@@ -2,6 +2,7 @@ package com.abashop.mapper;
 
 import com.abashop.pojo.Basket;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +22,8 @@ public interface BasketMapper {
 
     List<Basket> selectCartByUser(Long userId);
 
+    //    TODO 注意这个语句
+    int deleteBatch(@Param("userId") Long userId, @Param("basketIds") List<Long> basketIds);
+
+    int deleteByUser(Long userId);
 }

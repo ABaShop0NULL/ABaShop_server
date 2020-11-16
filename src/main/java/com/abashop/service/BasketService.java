@@ -18,5 +18,7 @@ public interface BasketService {
 
     int modifyCartInfo(Basket basket);
 
-//    int deleteCartInfo();
+    int deleteCartInfo(Long userId, List<Long> basketIds);
+
+    int deleteByUser(Long userId);
 }

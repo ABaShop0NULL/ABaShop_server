@@ -70,18 +70,23 @@ public class BasketController {
     }
 
     //    删除记录
-    public RespUtil deleteOne(@RequestBody List<Long> basketIds, HttpServletRequest servletRequest) {
+    public RespUtil deleteCartInfo(@RequestBody List<Long> basketIds, HttpServletRequest servletRequest) {
         Long userId = (Long) servletRequest.getSession().getAttribute("userId");
-
-        return new RespUtil("success", "");
+        if (service.deleteCartInfo(userId, basketIds) != 0) {
+            return new RespUtil("success", "删除成功");
+        }
+        return new RespUtil("error", "哪里出错了呢");
     }
 
     //    全选删除
     @DeleteMapping("/deleteAll")
     private RespUtil deleteAll(HttpServletRequest servletRequest) {
         Long userId = (Long) servletRequest.getSession().getAttribute("userId");
-
-        return new RespUtil("success", "删除所有");
+        if (service.deleteByUser(userId) != 0) {
+            return new RespUtil("success", "删除所有");
+        } else {
+            return new RespUtil("error", "出问题了！");
+        }
     }
 
 }

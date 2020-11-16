@@ -34,4 +34,14 @@ public class BasketServiceImpl implements BasketService {
     public int modifyCartInfo(Basket basket) {
         return mapper.updateByPrimaryKeySelective(basket);
     }
+
+    @Override
+    public int deleteCartInfo(Long userId, List<Long> basketIds) {
+        return mapper.deleteBatch(userId, basketIds);
+    }
+
+    @Override
+    public int deleteByUser(Long userId) {
+        return mapper.deleteByUser(userId);
+    }
 }
