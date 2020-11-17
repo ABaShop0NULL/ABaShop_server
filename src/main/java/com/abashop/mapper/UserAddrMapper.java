@@ -18,4 +18,6 @@ public interface UserAddrMapper {
     int updateByPrimaryKey(UserAddr record);
 
     List<UserAddr> selectByUser(Long userId);
+
+    UserAddr selectAddrByUser(Long addId, Long userId);
 }

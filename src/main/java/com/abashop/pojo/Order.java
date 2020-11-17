@@ -2,15 +2,16 @@ package com.abashop.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Long orderId;
 
     private Long shopId;
 
-    private String prodName;
+    private String goodsName;
 
-    private String userId;
+    private Long userId;
 
     private String orderNumber;
 
@@ -60,10 +61,10 @@ public class Order {
 
     private Byte closeType;
 
-    public Order(Long orderId, Long shopId, String prodName, String userId, String orderNumber, BigDecimal total, BigDecimal actualTotal, Integer payType, String remarks, Integer status, String dvyType, Long dvyId, String dvyFlowId, BigDecimal freightAmount, Long addrOrderId, Integer productNums, Date createTime, Date updateTime, Date payTime, Date dvyTime, Date finallyTime, Date cancelTime, Boolean isPayed, Integer deleteStatus, Integer refundSts, BigDecimal reduceAmount, Byte orderType, Byte closeType) {
+    public Order(Long orderId, Long shopId, String goodsName, Long userId, String orderNumber, BigDecimal total, BigDecimal actualTotal, Integer payType, String remarks, Integer status, String dvyType, Long dvyId, String dvyFlowId, BigDecimal freightAmount, Long addrOrderId, Integer productNums, Date createTime, Date updateTime, Date payTime, Date dvyTime, Date finallyTime, Date cancelTime, Boolean isPayed, Integer deleteStatus, Integer refundSts, BigDecimal reduceAmount, Byte orderType, Byte closeType) {
         this.orderId = orderId;
         this.shopId = shopId;
-        this.prodName = prodName;
+        this.goodsName = goodsName;
         this.userId = userId;
         this.orderNumber = orderNumber;
         this.total = total;
@@ -111,20 +112,20 @@ public class Order {
         this.shopId = shopId;
     }
 
-    public String getProdName() {
-        return prodName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setProdName(String prodName) {
-        this.prodName = prodName == null ? null : prodName.trim();
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getOrderNumber() {

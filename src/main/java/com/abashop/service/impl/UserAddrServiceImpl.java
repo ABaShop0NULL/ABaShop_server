@@ -20,8 +20,13 @@ public class UserAddrServiceImpl implements UserAddrService {
     private UserAddrMapper mapper;
 
     @Override
-    public List<UserAddr> getAddress(Long userId) {
+    public List<UserAddr> getAddressList(Long userId) {
         return mapper.selectByUser(userId);
+    }
+
+    @Override
+    public UserAddr getAddress(Long addrId, Long userId) {
+        return mapper.selectAddrByUser(addrId, userId);
     }
 
     @Override

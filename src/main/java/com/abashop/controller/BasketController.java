@@ -59,6 +59,7 @@ public class BasketController {
         } else {
             //修改，但是这个修改只能是修改商品数量，数量必须大于等于一
 //            TODO num值从前端传过来的数据中取
+            basket.setBasketDate(date);
             result = service.modifyCartInfo(basket);
         }
         if (result != 0) {

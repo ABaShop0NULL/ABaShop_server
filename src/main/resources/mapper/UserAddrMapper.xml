@@ -36,6 +36,12 @@
         from user_addr
         where user_id = #{userId,jdbcType=BIGINT}
     </select>
+    <select id="selectAddrByUser">
+        select
+        <include refid="Base_Column_List"/>
+        from user_addr
+        where user_id = #{userId,jdbcType=BIGINT} and add_id = #{addId,jdbcType=BIGINT}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_addr
     where add_id = #{addId,jdbcType=BIGINT}

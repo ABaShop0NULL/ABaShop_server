@@ -29,7 +29,7 @@ public class UserAddrController {
     public RespUtil showAddr(HttpServletRequest servletRequest) {
         Long userId = (Long) servletRequest.getSession().getAttribute("userId");
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
-        List<UserAddr> addrList = service.getAddress(userId);
+        List<UserAddr> addrList = service.getAddressList(userId);
 //        TODO 尝试序列化优化
         for (UserAddr addr : addrList) {
             Map<String, Object> map = new HashMap<>();

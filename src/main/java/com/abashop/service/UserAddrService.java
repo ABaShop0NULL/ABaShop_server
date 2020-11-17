@@ -12,7 +12,9 @@ import java.util.List;
 public interface UserAddrService {
 
     //    查询用户的收获地址
-    List<UserAddr> getAddress(Long userId);
+    List<UserAddr> getAddressList(Long userId);
+
+    UserAddr getAddress(Long addrId, Long userId);
 
     //    增加收货地址
     int addAddress(UserAddr userAddr);
