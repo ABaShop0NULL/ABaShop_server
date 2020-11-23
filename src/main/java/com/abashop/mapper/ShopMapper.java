@@ -1,7 +1,9 @@
 package com.abashop.mapper;
 
 import com.abashop.pojo.Shop;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ShopMapper {
     int deleteByPrimaryKey(Long shopId);
 
