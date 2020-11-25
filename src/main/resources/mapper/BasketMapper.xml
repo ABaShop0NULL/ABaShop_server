@@ -25,10 +25,13 @@
             <result column="shop_name" property="shopName"/>
         </association>
     </resultMap>
-    <select id="selectCartByUser" parameterType="java.lang.Long" resultMap="Basket">
+    <select id="selectCartByUser" parameterType="java.lang.Long" resultMap="Cart">
         select b.basket_id, s.shop_name, g.goods_name, b.num, b.basket_date, g.price, g.goods_pic
-        from basket b,left join shop s on b.shop_id = s.shop_id
-        left goods g on b.goods_id = g.goods_id
+        from basket b,
+             left
+                 join shop s on b.shop_id = s.shop_id
+            left goods g
+        on b.goods_id = g.goods_id
         where u.user_id = #{userId,jdbcType=BIGINT}
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BasketResultMap">

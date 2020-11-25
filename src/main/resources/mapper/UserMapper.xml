@@ -21,12 +21,24 @@
     <sql id="Base_Column_List">
     user_id, user_name, sex, user_password, phone, user_img_id
   </sql>
-    <sql id="SelectByUser">
+   <!-- <sql id="SelectByUser">
     user_name, sex, phone
-  </sql>
+  </sql>-->
     <select id="selectByUser" parameterType="User" resultMap="ResultMap">
+        select user_name, sex, phone
+        from user
+        where
+        <if test="userName != null">
+            user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        and user_password = #{userPassword,jdbcType=VARCHAR}
+    </select>
+    <select id="selectForLogin" parameterType="User" resultMap="UserResultMap">
         select
-        <include refid="SelectByUser"/>
+        <include refid="Base_Column_List"/>
         from user
         where
         <if test="userName != null">
@@ -44,9 +56,10 @@
         where user_id = #{userId,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
-    where user_id = #{userId,jdbcType=BIGINT}
-  </delete>
+        delete
+        from user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="User">
     insert into user (user_id, user_name, sex, 
       user_password, phone, user_img_id

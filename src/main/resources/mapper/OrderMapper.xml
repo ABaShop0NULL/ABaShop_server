@@ -1,367 +1,388 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abashop.mapper.OrderMapper">
-    <resultMap id="OrderResultMap" type="Order">
-        <constructor>
-            <idArg column="order_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="prod_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="order_number" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="total" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-            <arg column="actual_total" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-            <arg column="pay_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="remarks" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="dvy_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="dvy_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="dvy_flow_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="freight_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-            <arg column="addr_order_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="product_nums" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="pay_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="dvy_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="finally_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="cancel_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="is_payed" javaType="java.lang.Boolean" jdbcType="BIT"/>
-            <arg column="delete_status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="refund_sts" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="reduce_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-            <arg column="order_type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
-            <arg column="close_type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
-        </constructor>
-    </resultMap>
-    <sql id="Order_Column_List">
-    order_id, shop_id, prod_name, user_id, order_number, total, actual_total, pay_type, 
+  <resultMap id="BaseResultMap" type="com.abashop.pojo.Order">
+    <constructor>
+      <idArg column="order_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+      <arg column="shop_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+      <arg column="goods_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+      <arg column="order_number" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="total" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <arg column="actual_total" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <arg column="pay_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="remarks" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="dvy_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="dvy_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+      <arg column="dvy_flow_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="freight_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <arg column="addr_order_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+      <arg column="product_nums" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="pay_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="dvy_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="finally_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="cancel_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="is_payed" javaType="java.lang.Boolean" jdbcType="BIT"/>
+      <arg column="delete_status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="refund_sts" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="reduce_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+      <arg column="order_type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
+      <arg column="close_type" javaType="java.lang.Byte" jdbcType="TINYINT"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id
+    , shop_id, goods_name, user_id, order_number, total, actual_total, pay_type,
     remarks, status, dvy_type, dvy_id, dvy_flow_id, freight_amount, addr_order_id, product_nums, 
     create_time, update_time, pay_time, dvy_time, finally_time, cancel_time, is_payed, 
     delete_status, refund_sts, reduce_amount, order_type, close_type
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="OrderResultMap">
-        select
-        <include refid="Order_Column_List"/>
-        from order
-        where order_id = #{orderId,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from order
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByOrderNumber" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from order
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </select>
+  <select id="selectOrder" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List"/>
+    from order
+    where delete_status = 0 and user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete
+    from order
     where order_id = #{orderId,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="Order">
-    insert into order (order_id, shop_id, prod_name, 
-      user_id, order_number, total, 
-      actual_total, pay_type, remarks, 
-      status, dvy_type, dvy_id, 
-      dvy_flow_id, freight_amount, addr_order_id, 
-      product_nums, create_time, update_time, 
-      pay_time, dvy_time, finally_time, 
-      cancel_time, is_payed, delete_status, 
-      refund_sts, reduce_amount, order_type, 
-      close_type)
-    values (#{orderId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{prodName,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, 
-      #{actualTotal,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{dvyType,jdbcType=VARCHAR}, #{dvyId,jdbcType=BIGINT}, 
-      #{dvyFlowId,jdbcType=VARCHAR}, #{freightAmount,jdbcType=DECIMAL}, #{addrOrderId,jdbcType=BIGINT}, 
-      #{productNums,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{payTime,jdbcType=TIMESTAMP}, #{dvyTime,jdbcType=TIMESTAMP}, #{finallyTime,jdbcType=TIMESTAMP}, 
-      #{cancelTime,jdbcType=TIMESTAMP}, #{isPayed,jdbcType=BIT}, #{deleteStatus,jdbcType=INTEGER}, 
-      #{refundSts,jdbcType=INTEGER}, #{reduceAmount,jdbcType=DECIMAL}, #{orderType,jdbcType=TINYINT}, 
-      #{closeType,jdbcType=TINYINT})
+  <delete id="deleteOrders">
+    delete from order
+    where user_id = #{userId,jdbcType=BIGINT} and order_id in
+    <foreach collection="orderIds" open="(" separator="),(" close=")" index="index" item="item">
+      #{orderId,jdbcType=BIGINT}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.abashop.pojo.Order">
+    insert into order (order_id, shop_id, goods_name,
+                       user_id, order_number, total,
+                       actual_total, pay_type, remarks,
+                       status, dvy_type, dvy_id,
+                       dvy_flow_id, freight_amount, addr_order_id,
+                       product_nums, create_time, update_time,
+                       pay_time, dvy_time, finally_time,
+                       cancel_time, is_payed, delete_status,
+                       refund_sts, reduce_amount, order_type,
+                       close_type)
+    values (#{orderId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR},
+            #{userId,jdbcType=BIGINT}, #{orderNumber,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL},
+            #{actualTotal,jdbcType=DECIMAL}, #{payType,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR},
+            #{status,jdbcType=INTEGER}, #{dvyType,jdbcType=VARCHAR}, #{dvyId,jdbcType=BIGINT},
+            #{dvyFlowId,jdbcType=VARCHAR}, #{freightAmount,jdbcType=DECIMAL}, #{addrOrderId,jdbcType=BIGINT},
+            #{productNums,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+            #{payTime,jdbcType=TIMESTAMP}, #{dvyTime,jdbcType=TIMESTAMP}, #{finallyTime,jdbcType=TIMESTAMP},
+            #{cancelTime,jdbcType=TIMESTAMP}, #{isPayed,jdbcType=BIT}, #{deleteStatus,jdbcType=INTEGER},
+            #{refundSts,jdbcType=INTEGER}, #{reduceAmount,jdbcType=DECIMAL}, #{orderType,jdbcType=TINYINT},
+            #{closeType,jdbcType=TINYINT})
   </insert>
-    <insert id="insertSelective" parameterType="Order">
-        insert into order
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="orderId != null">
-                order_id,
-            </if>
-            <if test="shopId != null">
-                shop_id,
-            </if>
-            <if test="prodName != null">
-                prod_name,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="orderNumber != null">
-                order_number,
-            </if>
-            <if test="total != null">
-                total,
-            </if>
-            <if test="actualTotal != null">
-                actual_total,
-            </if>
-            <if test="payType != null">
-                pay_type,
-            </if>
-            <if test="remarks != null">
-                remarks,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="dvyType != null">
-                dvy_type,
-            </if>
-            <if test="dvyId != null">
-                dvy_id,
-            </if>
-            <if test="dvyFlowId != null">
-                dvy_flow_id,
-            </if>
-            <if test="freightAmount != null">
-                freight_amount,
-            </if>
-            <if test="addrOrderId != null">
-                addr_order_id,
-            </if>
-            <if test="productNums != null">
-                product_nums,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
-            <if test="payTime != null">
-                pay_time,
-            </if>
-            <if test="dvyTime != null">
-                dvy_time,
-            </if>
-            <if test="finallyTime != null">
-                finally_time,
-            </if>
-            <if test="cancelTime != null">
-                cancel_time,
-            </if>
-            <if test="isPayed != null">
-                is_payed,
-            </if>
-            <if test="deleteStatus != null">
-                delete_status,
-            </if>
-            <if test="refundSts != null">
-                refund_sts,
-            </if>
-            <if test="reduceAmount != null">
-                reduce_amount,
-            </if>
-            <if test="orderType != null">
-                order_type,
-            </if>
-            <if test="closeType != null">
-                close_type,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="orderId != null">
-                #{orderId,jdbcType=BIGINT},
-            </if>
-            <if test="shopId != null">
-                #{shopId,jdbcType=BIGINT},
-            </if>
-            <if test="prodName != null">
-                #{prodName,jdbcType=VARCHAR},
-            </if>
-            <if test="userId != null">
-                #{userId,jdbcType=VARCHAR},
-            </if>
-            <if test="orderNumber != null">
-                #{orderNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="total != null">
-                #{total,jdbcType=DECIMAL},
-            </if>
-            <if test="actualTotal != null">
-                #{actualTotal,jdbcType=DECIMAL},
-            </if>
-            <if test="payType != null">
-                #{payType,jdbcType=INTEGER},
-            </if>
-            <if test="remarks != null">
-                #{remarks,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-            <if test="dvyType != null">
-                #{dvyType,jdbcType=VARCHAR},
-            </if>
-            <if test="dvyId != null">
-                #{dvyId,jdbcType=BIGINT},
-            </if>
-            <if test="dvyFlowId != null">
-                #{dvyFlowId,jdbcType=VARCHAR},
-            </if>
-            <if test="freightAmount != null">
-                #{freightAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="addrOrderId != null">
-                #{addrOrderId,jdbcType=BIGINT},
-            </if>
-            <if test="productNums != null">
-                #{productNums,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="payTime != null">
-                #{payTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="dvyTime != null">
-                #{dvyTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="finallyTime != null">
-                #{finallyTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="cancelTime != null">
-                #{cancelTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isPayed != null">
-                #{isPayed,jdbcType=BIT},
-            </if>
-            <if test="deleteStatus != null">
-                #{deleteStatus,jdbcType=INTEGER},
-            </if>
-            <if test="refundSts != null">
-                #{refundSts,jdbcType=INTEGER},
-            </if>
-            <if test="reduceAmount != null">
-                #{reduceAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="orderType != null">
-                #{orderType,jdbcType=TINYINT},
-            </if>
-            <if test="closeType != null">
-                #{closeType,jdbcType=TINYINT},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="Order">
-        update order
-        <set>
-            <if test="shopId != null">
-                shop_id = #{shopId,jdbcType=BIGINT},
-            </if>
-            <if test="prodName != null">
-                prod_name = #{prodName,jdbcType=VARCHAR},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=VARCHAR},
-            </if>
-            <if test="orderNumber != null">
-                order_number = #{orderNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="total != null">
-                total = #{total,jdbcType=DECIMAL},
-            </if>
-            <if test="actualTotal != null">
-                actual_total = #{actualTotal,jdbcType=DECIMAL},
-            </if>
-            <if test="payType != null">
-                pay_type = #{payType,jdbcType=INTEGER},
-            </if>
-            <if test="remarks != null">
-                remarks = #{remarks,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="dvyType != null">
-                dvy_type = #{dvyType,jdbcType=VARCHAR},
-            </if>
-            <if test="dvyId != null">
-                dvy_id = #{dvyId,jdbcType=BIGINT},
-            </if>
-            <if test="dvyFlowId != null">
-                dvy_flow_id = #{dvyFlowId,jdbcType=VARCHAR},
-            </if>
-            <if test="freightAmount != null">
-                freight_amount = #{freightAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="addrOrderId != null">
-                addr_order_id = #{addrOrderId,jdbcType=BIGINT},
-            </if>
-            <if test="productNums != null">
-                product_nums = #{productNums,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="payTime != null">
-                pay_time = #{payTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="dvyTime != null">
-                dvy_time = #{dvyTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="finallyTime != null">
-                finally_time = #{finallyTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="cancelTime != null">
-                cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isPayed != null">
-                is_payed = #{isPayed,jdbcType=BIT},
-            </if>
-            <if test="deleteStatus != null">
-                delete_status = #{deleteStatus,jdbcType=INTEGER},
-            </if>
-            <if test="refundSts != null">
-                refund_sts = #{refundSts,jdbcType=INTEGER},
-            </if>
-            <if test="reduceAmount != null">
-                reduce_amount = #{reduceAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="orderType != null">
-                order_type = #{orderType,jdbcType=TINYINT},
-            </if>
-            <if test="closeType != null">
-                close_type = #{closeType,jdbcType=TINYINT},
-            </if>
-        </set>
-        where order_id = #{orderId,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="Order">
+  <insert id="insertSelective" parameterType="com.abashop.pojo.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="actualTotal != null">
+        actual_total,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="dvyType != null">
+        dvy_type,
+      </if>
+      <if test="dvyId != null">
+        dvy_id,
+      </if>
+      <if test="dvyFlowId != null">
+        dvy_flow_id,
+      </if>
+      <if test="freightAmount != null">
+        freight_amount,
+      </if>
+      <if test="addrOrderId != null">
+        addr_order_id,
+      </if>
+      <if test="productNums != null">
+        product_nums,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="dvyTime != null">
+        dvy_time,
+      </if>
+      <if test="finallyTime != null">
+        finally_time,
+      </if>
+      <if test="cancelTime != null">
+        cancel_time,
+      </if>
+      <if test="isPayed != null">
+        is_payed,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="refundSts != null">
+        refund_sts,
+      </if>
+      <if test="reduceAmount != null">
+        reduce_amount,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="closeType != null">
+        close_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="actualTotal != null">
+        #{actualTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="dvyType != null">
+        #{dvyType,jdbcType=VARCHAR},
+      </if>
+      <if test="dvyId != null">
+        #{dvyId,jdbcType=BIGINT},
+      </if>
+      <if test="dvyFlowId != null">
+        #{dvyFlowId,jdbcType=VARCHAR},
+      </if>
+      <if test="freightAmount != null">
+        #{freightAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="addrOrderId != null">
+        #{addrOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="productNums != null">
+        #{productNums,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dvyTime != null">
+        #{dvyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finallyTime != null">
+        #{finallyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelTime != null">
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPayed != null">
+        #{isPayed,jdbcType=BIT},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundSts != null">
+        #{refundSts,jdbcType=INTEGER},
+      </if>
+      <if test="reduceAmount != null">
+        #{reduceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="closeType != null">
+        #{closeType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abashop.pojo.Order">
     update order
-    set shop_id = #{shopId,jdbcType=BIGINT},
-      prod_name = #{prodName,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      order_number = #{orderNumber,jdbcType=VARCHAR},
-      total = #{total,jdbcType=DECIMAL},
-      actual_total = #{actualTotal,jdbcType=DECIMAL},
-      pay_type = #{payType,jdbcType=INTEGER},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      dvy_type = #{dvyType,jdbcType=VARCHAR},
-      dvy_id = #{dvyId,jdbcType=BIGINT},
-      dvy_flow_id = #{dvyFlowId,jdbcType=VARCHAR},
-      freight_amount = #{freightAmount,jdbcType=DECIMAL},
-      addr_order_id = #{addrOrderId,jdbcType=BIGINT},
-      product_nums = #{productNums,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      dvy_time = #{dvyTime,jdbcType=TIMESTAMP},
-      finally_time = #{finallyTime,jdbcType=TIMESTAMP},
-      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
-      is_payed = #{isPayed,jdbcType=BIT},
-      delete_status = #{deleteStatus,jdbcType=INTEGER},
-      refund_sts = #{refundSts,jdbcType=INTEGER},
-      reduce_amount = #{reduceAmount,jdbcType=DECIMAL},
-      order_type = #{orderType,jdbcType=TINYINT},
-      close_type = #{closeType,jdbcType=TINYINT}
+    <set>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="actualTotal != null">
+        actual_total = #{actualTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="dvyType != null">
+        dvy_type = #{dvyType,jdbcType=VARCHAR},
+      </if>
+      <if test="dvyId != null">
+        dvy_id = #{dvyId,jdbcType=BIGINT},
+      </if>
+      <if test="dvyFlowId != null">
+        dvy_flow_id = #{dvyFlowId,jdbcType=VARCHAR},
+      </if>
+      <if test="freightAmount != null">
+        freight_amount = #{freightAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="addrOrderId != null">
+        addr_order_id = #{addrOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="productNums != null">
+        product_nums = #{productNums,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dvyTime != null">
+        dvy_time = #{dvyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finallyTime != null">
+        finally_time = #{finallyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelTime != null">
+        cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPayed != null">
+        is_payed = #{isPayed,jdbcType=BIT},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="refundSts != null">
+        refund_sts = #{refundSts,jdbcType=INTEGER},
+      </if>
+      <if test="reduceAmount != null">
+        reduce_amount = #{reduceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="closeType != null">
+        close_type = #{closeType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abashop.pojo.Order">
+    update order
+    set shop_id        = #{shopId,jdbcType=BIGINT},
+        goods_name     = #{goodsName,jdbcType=VARCHAR},
+        user_id        = #{userId,jdbcType=BIGINT},
+        order_number   = #{orderNumber,jdbcType=VARCHAR},
+        total          = #{total,jdbcType=DECIMAL},
+        actual_total   = #{actualTotal,jdbcType=DECIMAL},
+        pay_type       = #{payType,jdbcType=INTEGER},
+        remarks        = #{remarks,jdbcType=VARCHAR},
+        status         = #{status,jdbcType=INTEGER},
+        dvy_type       = #{dvyType,jdbcType=VARCHAR},
+        dvy_id         = #{dvyId,jdbcType=BIGINT},
+        dvy_flow_id    = #{dvyFlowId,jdbcType=VARCHAR},
+        freight_amount = #{freightAmount,jdbcType=DECIMAL},
+        addr_order_id  = #{addrOrderId,jdbcType=BIGINT},
+        product_nums   = #{productNums,jdbcType=INTEGER},
+        create_time    = #{createTime,jdbcType=TIMESTAMP},
+        update_time    = #{updateTime,jdbcType=TIMESTAMP},
+        pay_time       = #{payTime,jdbcType=TIMESTAMP},
+        dvy_time       = #{dvyTime,jdbcType=TIMESTAMP},
+        finally_time   = #{finallyTime,jdbcType=TIMESTAMP},
+        cancel_time    = #{cancelTime,jdbcType=TIMESTAMP},
+        is_payed       = #{isPayed,jdbcType=BIT},
+        delete_status  = #{deleteStatus,jdbcType=INTEGER},
+        refund_sts     = #{refundSts,jdbcType=INTEGER},
+        reduce_amount  = #{reduceAmount,jdbcType=DECIMAL},
+        order_type     = #{orderType,jdbcType=TINYINT},
+        close_type     = #{closeType,jdbcType=TINYINT}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

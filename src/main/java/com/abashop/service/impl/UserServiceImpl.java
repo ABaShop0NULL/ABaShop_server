@@ -34,4 +34,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
+    @Override
+    public User findUserById(Long userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public User findUserInfo(User user) {
+        return userMapper.selectForLogin(user);
+    }
+
 }

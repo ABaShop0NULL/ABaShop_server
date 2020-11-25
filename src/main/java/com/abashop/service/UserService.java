@@ -14,4 +14,8 @@ public interface UserService {
     int register(User user);
 
     int userUpdate(User user);
+
+    User findUserById(Long userId);
+
+    User findUserInfo(User user);
 }
